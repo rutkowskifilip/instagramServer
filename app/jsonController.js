@@ -1,7 +1,11 @@
 const { Image } = require("./model");
-
+const images = new Array();
 module.exports = {
-  add: (req, res) => {
+  add: (dir, filename) => {
+    const image = new Image(dir, filename);
+    images.push(image);
+
+    return JSON.stringify(image);
     // add
   },
   get: (id) => {

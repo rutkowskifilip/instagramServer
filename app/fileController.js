@@ -1,7 +1,10 @@
+const { rejects } = require("assert");
 const formidable = require("formidable");
 const fs = require("fs");
+const { resolve } = require("path");
+const jsonController = require("./jsonController");
 module.exports = {
-  add: (req, res) => {
+  add: async (req, res) => {
     // add
 
     const form = formidable({
@@ -10,24 +13,26 @@ module.exports = {
       keepExtensions: true,
     });
 
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        return res.status(400).json({
-          status: "Fail",
-          message: "There was an error parsing file",
-          error: err,
-        });
-      } else {
-        const { path } = files.file;
-        const dir = fields.directory;
-        console.log(files.file);
-        // try {
-        //   fs.renameSync(path, join(uploadDir, dir));
-        // } catch (error) {
-        //   console.log(error);
-        // }
-        return { fields, files };
-      }
+    return new Promise((resolve, reject) => {
+      form.parse(req, async (err, fields, files) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          const { path } = files.file;
+          const dir = fields.directory;
+          filename = path.split("\\").at(-1);
+          newDir = __dirname + "/uploads/" + dir;
+          try {
+            if (!fs.existsSync(newDir)) {
+              fs.mkdirSync(newDir);
+            }
+            fs.renameSync(path, newDir + "/" + filename);
+          } catch (error) {
+            console.log(error);
+          }
+          resolve({ dir: newDir, filename: filename });
+        }
+      });
     });
   },
   get: (id) => {

@@ -1,8 +1,9 @@
 class Image {
-  constructor(album, originalName) {
+  constructor(url, originalName) {
     this.id = Date.now();
-    this.album = album;
+    this.album = url.split("/").at(-1);
     this.originalName = originalName;
+    this.url = url;
     this.lastChange = "orignal";
     this.history = [{ status: "original", lastModifiedDate: Date.now() }];
   }

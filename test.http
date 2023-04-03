@@ -11,5 +11,5 @@ Content-Type: image/jpeg
 Content-Disposition: form-data; name="directory"
 Content-Type: text/plain
 
-nazwa_albumu
+album_name
 ------FormBoundary1234
