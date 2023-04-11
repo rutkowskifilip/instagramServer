@@ -1,0 +1,13 @@
+{
+  "name": "Nodemon Launch Server",
+  "type": "node",
+  "request": "launch",
+  "cwd": "${workspaceRoot}",
+  "runtimeExecutable": "nodemon",
+  "runtimeArgs": ["--debug=5858"],
+  "program": "${workspaceRoot}/index.js",
+  "restart": true,
+  "port": 5858,
+  "console": "integratedTerminal",
+  "internalConsoleOptions": "neverOpen"
+}
