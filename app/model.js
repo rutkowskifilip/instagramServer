@@ -3,7 +3,7 @@ class Image {
     this.id = id;
     this.album = url.split("/").at(-1);
     this.originalName = originalName;
-    this.url = url;
+    this.url = url + "/" + originalName;
     this.lastChange = "orignal";
     this.history = [{ status: "original", lastModifiedDate: Date.now() }];
     this.tags = [];

@@ -21,12 +21,11 @@ module.exports = {
 
     // add
   },
-  get: (res, id) => {
+  get: (id) => {
     const image = images.find((e) => e.id === parseInt(id));
     if (image) {
       return JSON.stringify(image);
     } else {
-      res.statusCode = 404;
       return JSON.stringify({ message: `There's no image with id ${id}` });
     }
     //get one by id

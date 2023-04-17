@@ -1,4 +1,3 @@
-const jsonController = require("./jsonController");
 const { Tag } = require("./model");
 const popularTags = require("./popularTags");
 const tags = new Array();

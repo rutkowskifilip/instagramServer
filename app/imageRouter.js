@@ -18,7 +18,7 @@ const imageRouter = async (req, res) => {
     const id = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
 
-    res.end(jsonController.get(res, id));
+    res.end(jsonController.get(id));
   } else if (
     req.url.match(/\/api\/photos\/([0-9]+)/) &&
     req.method == "DELETE"

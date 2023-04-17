@@ -1,0 +1,17 @@
+### GET - file metadata
+GET http://localhost:3000/api/filters/metadata/1 HTTP/1.1
+
+
+### PATCH - use filter
+PATCH  http://localhost:3000/api/filters HTTP/1.1
+content-type: application/json
+
+{
+  "id": 1,
+  "lastChange": "resize",
+  "rotate": 90,
+  "resize": {"width": 5, "height": 100},
+  "reformat":"png",
+  "crop": {"width": 200, "height": 200, "left": 20, "top": 20 },
+  "tint": {"r":255,"g":0,"b":0}
+}

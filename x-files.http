@@ -1,0 +1,2 @@
+### GET - get  file by id with filter
+GET http://localhost:3000/api/getfile/1/tint HTTP/1.1
