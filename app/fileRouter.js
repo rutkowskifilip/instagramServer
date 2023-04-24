@@ -44,6 +44,13 @@ const fileRouter = async (req, res) => {
       res.statusCode = 404;
       res.end(JSON.stringify({ message: "file does not exist" }));
     }
+  } else if (
+    req.url.match(/\/api\/getfile\/([a-zA-Z]+)/) &&
+    req.method == "GET"
+  ) {
+    const albumName = req.url.split("/").at(-1);
+    res.setHeader("Content-Type", "application/json");
+    res.end(jsonController.getByAlbum(albumName));
   }
 };
 

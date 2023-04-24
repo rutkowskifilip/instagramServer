@@ -40,6 +40,15 @@ module.exports = {
   getall: () => {
     return JSON.stringify(images);
   },
+  getByAlbum: (name) => {
+    console.log(name);
+    images.forEach((e) => {
+      console.log(e.album, name);
+    });
+    files = images.filter((e) => e.album === name);
+
+    return JSON.stringify(files);
+  },
   delete: (id) => {
     const image = images.find((e) => e.id === parseInt(id));
 
