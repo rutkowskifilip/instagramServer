@@ -1,2 +1,8 @@
-### GET - get  file by id with filter
+### GET - get file by id with filter
+GET http://localhost:3000/api/getfile/1/grayscale HTTP/1.1
+
+### GET - get file by id 
 GET http://localhost:3000/api/getfile/1 HTTP/1.1
+
+### GET - get files from dir
+GET http://localhost:3000/api/getfile/album HTTP/1.1
