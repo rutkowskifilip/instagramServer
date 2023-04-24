@@ -18,7 +18,7 @@ const filtersRouter = async (req, res) => {
 
     res.setHeader("Content-Type", "application/json");
     if (url) {
-      res.end(await filtersController.filter(data, url, res));
+      res.end(await filtersController.filter(id, data, url, res));
     } else {
       res.statusCode = 404;
       res.end(JSON.stringify({ message: "file does not exist" }));

@@ -21,7 +21,7 @@ module.exports = {
     });
   },
 
-  filter: async (data, url, res) => {
+  filter: async (id, data, url, res) => {
     const { lastChange: type } = data;
     const types = ["jpg", "png", "webp", "gif", "avif"];
     if (types.includes(url.split(".").at(-1))) {
@@ -68,7 +68,8 @@ module.exports = {
           });
           break;
       }
-      return JSON.stringify({ message: "succcess", type: type });
+
+      return jsonController.update(id, type);
     } else {
       res.statusCode = 404;
       return JSON.stringify({

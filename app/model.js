@@ -8,7 +8,9 @@ class Image {
     this.history = [{ status: "original", lastModifiedDate: Date.now() }];
     this.tags = [];
   }
-
+  setHistory(update) {
+    this.history.push({ status: update, lastModifiedDate: Date.now() });
+  }
   setTags(tag) {
     if (this.tags.filter((e) => e.name === tag.name).length === 0) {
       this.tags.push({ name: tag.name, popularity: tag.popularity });
