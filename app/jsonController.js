@@ -22,11 +22,18 @@ module.exports = {
     // add
   },
   get: (id) => {
-    const image = images.find((e) => e.id === parseInt(id));
+    console.log(id);
+    let image = "";
+    if (parseInt(id) === 0) {
+      image = images.at(-1);
+    } else {
+      image = images.find((e) => e.id === parseInt(id));
+    }
+
     if (image) {
       return JSON.stringify(image);
     } else {
-      return JSON.stringify({ message: `There's no image with id ${id}` });
+      return JSON.stringify({ message: `There's no file with id ${id}` });
     }
     //get one by id
   },
@@ -60,7 +67,7 @@ module.exports = {
       return JSON.stringify(image);
     } else {
       res.statusCode = 404;
-      return JSON.stringify({ message: `There's no image with id ${data.id}` });
+      return JSON.stringify({ message: `There's no file with id ${data.id}` });
     }
   },
   getTags: (res, id) => {
@@ -69,7 +76,7 @@ module.exports = {
       return JSON.stringify({ id: id, tags: image.tags });
     } else {
       res.statusCode = 404;
-      return JSON.stringify({ message: `There's no image with id ${id}` });
+      return JSON.stringify({ message: `There's no file with id ${id}` });
     }
   },
 };
