@@ -1,10 +1,12 @@
 const http = require("http");
+require("dotenv").config();
 const imageRouter = require("./app/imageRouter");
 
 const tagsRouter = require("./app/tagsRouter");
 const filtersRouter = require("./app/filtersRouter");
 const fileRouter = require("./app/fileRouter");
-const PORT = 3000;
+const usersRouter = require("./app/usersRouter");
+
 http
   .createServer(async (req, res) => {
     //images
@@ -22,6 +24,10 @@ http
       await filtersRouter(req, res);
     } else if (req.url.search("/api/getfile") != -1) {
       await fileRouter(req, res);
+    } else if (req.url.search("/api/users") != -1) {
+      await usersRouter(req, res);
     }
   })
-  .listen(PORT, () => console.log("listen on 3000"));
+  .listen(process.env.APP_PORT, () =>
+    console.log(`listen on ${process.env.APP_PORT}`)
+  );

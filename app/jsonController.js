@@ -1,6 +1,7 @@
 const { Image } = require("./model");
 const tagsController = require("./tagsController");
 let images = new Array();
+
 module.exports = {
   add: (arr) => {
     if (arr.length > 1) {

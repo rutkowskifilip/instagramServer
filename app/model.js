@@ -24,4 +24,14 @@ class Tag {
     this.popularity = popularity;
   }
 }
-module.exports = { Image, Tag };
+class User {
+  constructor(id, name, lastName, email, password) {
+    this.id = id;
+    this.name = name;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.confirmed = false;
+  }
+}
+module.exports = { Image, Tag, User };
