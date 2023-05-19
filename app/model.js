@@ -33,5 +33,9 @@ class User {
     this.password = password;
     this.confirmed = false;
   }
+
+  setConfirmed() {
+    this.confirmed = true;
+  }
 }
 module.exports = { Image, Tag, User };

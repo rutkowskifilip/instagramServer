@@ -17,9 +17,9 @@ module.exports = {
   verifyToken: async (token) => {
     try {
       let decoded = await jwt.verify(token, process.env.TOKEN_KEY);
-      console.log({ decoded: decoded });
+      return decoded.user;
     } catch (ex) {
-      console.log({ message: ex.message });
+      return { message: ex.message };
     }
   },
 };

@@ -7,6 +7,6 @@ module.exports = {
 
   decryptPass: async (userpass, encrypted) => {
     let decrypted = await bcrypt.compare(userpass, encrypted);
-    console.log(decrypted);
+    return decrypted;
   },
 };
