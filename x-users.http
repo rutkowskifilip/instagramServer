@@ -9,8 +9,14 @@ content-type: application/json
   "password":"password"
 }
 
-### GET - confimr
-GET http://localhost:3000/api/users/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJsb2dpbiI6ImVtYWlsQGVtYWlsLmNvbSJ9LCJpYXQiOjE2ODQxNDAzODQsImV4cCI6MTY4NDE0Mzk4NH0.NN9PDUrkUCg1msKpLBhVG1T6pDpMk2lBcPLor4XM3hY HTTP/1.1
+### GET - confirm user
+GET http://localhost:3000/api/users/confirm/121 HTTP/1.1
 
+### POST - login
+POST http://localhost:3000/api/users/login HTTP/1.1
+content-type: application/json
 
-
+{   
+  "email": "email@email.com",
+  "password":"password"
+}
