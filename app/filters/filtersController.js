@@ -1,8 +1,8 @@
 const sharp = require("sharp");
-const jsonController = require("./jsonController");
+const mediaController = require("../media/mediaController");
 module.exports = {
   metadata: async (id, res) => {
-    const { url } = JSON.parse(jsonController.get(id));
+    const { url } = JSON.parse(mediaController.get(id));
     console.log(url);
     return new Promise(async (resolve, reject) => {
       try {
@@ -69,7 +69,7 @@ module.exports = {
           break;
       }
 
-      return jsonController.update(id, type);
+      return mediaController.update(id, type);
     } else {
       res.statusCode = 404;
       return JSON.stringify({

@@ -1,7 +1,7 @@
-const fileController = require("./fileController");
-const jsonController = require("./jsonController");
-const getRequestData = require("./getRequestData");
-const imageRouter = async (req, res) => {
+const fileController = require("../file/fileController");
+const mediaController = require("./mediaController");
+const getRequestData = require("../utils/getRequestData");
+const mediaRouter = async (req, res) => {
   if (req.url == "/api/photos" && req.method == "POST") {
     // add one photo
 
@@ -11,14 +11,14 @@ const imageRouter = async (req, res) => {
 
     res.setHeader("Content-Type", "application/json");
 
-    res.end(jsonController.getall());
+    res.end(mediaController.getall());
   } else if (req.url.match(/\/api\/photos\/([0-9]+)/) && req.method == "GET") {
     // get photo by id
 
     const id = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
 
-    res.end(jsonController.get(id));
+    res.end(mediaController.get(id));
   } else if (
     req.url.match(/\/api\/photos\/([0-9]+)/) &&
     req.method == "DELETE"
@@ -36,7 +36,7 @@ const imageRouter = async (req, res) => {
   } else if (req.url == "/api/photos/tags" && req.method == "PATCH") {
     const data = await getRequestData(req);
     res.setHeader("Content-Type", "application/json");
-    res.end(jsonController.updateTags(res, JSON.parse(data)));
+    res.end(mediaController.updateTags(res, JSON.parse(data)));
 
     // add one tag to photo
   } else if (
@@ -45,8 +45,8 @@ const imageRouter = async (req, res) => {
   ) {
     const id = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
-    res.end(jsonController.getTags(res, id));
+    res.end(mediaController.getTags(res, id));
   }
 };
 
-module.exports = imageRouter;
+module.exports = mediaRouter;

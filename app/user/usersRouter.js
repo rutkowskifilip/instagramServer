@@ -1,4 +1,4 @@
-const getRequestData = require("./getRequestData");
+const getRequestData = require("../utils/getRequestData");
 const usersController = require("./usersController");
 
 const usersRouter = async (req, res) => {
@@ -7,6 +7,7 @@ const usersRouter = async (req, res) => {
     // register new user
 
     const data = JSON.parse(await getRequestData(req));
+
     usersController.register(res, data);
   } else if (
     req.url.match(/\/api\/users\/confirm\/([a-zA-Z0-9\.\-\_\$]+)/) &&

@@ -1,0 +1,4 @@
+### GET - get user info
+GET http://localhost:3000/api/profile HTTP/1.1
+Content-Type:application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJsb2dpbiI6ImFAYS5wbCJ9LCJpYXQiOjE2ODU5MDE4NjEsImV4cCI6MTY4NTkwNTQ2MX0.BSUmTPKTVqlEWA_YdCOg3R6lA37sRG-9iajzjt1kvqA

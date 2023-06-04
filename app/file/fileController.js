@@ -1,25 +1,30 @@
 const formidable = require("formidable");
 const fs = require("fs");
-const jsonController = require("./jsonController");
+const mediaController = require("../media/mediaController");
+const path = require("path");
+const { log } = require("console");
 module.exports = {
   add: (req, res) => {
     const form = formidable({
       multiples: true,
-      uploadDir: __dirname + "/uploads",
+      uploadDir: path.dirname(__dirname) + "/uploads",
       keepExtensions: true,
     });
     res.setHeader("Content-Type", "application/json");
     res.statusCode = 201;
+
     form.parse(req, async (err, fields, files) => {
       if (err) {
         return err;
       } else {
         const dir = fields.directory;
-        newDir = __dirname + "/uploads/" + dir;
+
+        newDir = path.dirname(__dirname) + "/uploads/" + dir;
         const photos = [];
         if (files.file.length > 1) {
           files.file.forEach((f) => {
             const { path } = f;
+
             filename = path.split("\\").at(-1);
             try {
               if (!fs.existsSync(newDir)) {
@@ -33,7 +38,7 @@ module.exports = {
             }
           });
 
-          res.end(jsonController.add(photos));
+          res.end(mediaController.add(photos));
         } else {
           const { path } = files.file;
           filename = path.split("\\").at(-1);
@@ -47,7 +52,7 @@ module.exports = {
             console.log(error);
           }
 
-          res.end(jsonController.add(photos));
+          res.end(mediaController.add(photos));
         }
       }
     });
@@ -56,7 +61,7 @@ module.exports = {
   delete: (id) => {
     // delete by id
     console.log(id);
-    const image = jsonController.delete(id);
+    const image = mediaController.delete(id);
     if (image !== 0) {
       try {
         fs.unlinkSync(image.url + "/" + image.originalName);

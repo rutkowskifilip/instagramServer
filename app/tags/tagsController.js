@@ -1,5 +1,5 @@
-const { Tag } = require("./model");
-const popularTags = require("./popularTags");
+const { Tag } = require("../model/model");
+const popularTags = require("../utils/popularTags");
 const tags = new Array();
 const tagsRaw = new Array();
 popularTags.forEach((e) => {

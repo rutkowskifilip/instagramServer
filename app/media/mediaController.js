@@ -1,5 +1,5 @@
-const { Image } = require("./model");
-const tagsController = require("./tagsController");
+const { Image } = require("../model/model");
+const tagsController = require("../tags/tagsController");
 let images = new Array();
 
 module.exports = {

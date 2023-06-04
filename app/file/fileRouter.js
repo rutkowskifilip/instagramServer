@@ -1,4 +1,4 @@
-const jsonController = require("./jsonController");
+const mediaController = require("../media/mediaController");
 const fs = require("fs");
 const fileRouter = async (req, res) => {
   if (
@@ -7,7 +7,7 @@ const fileRouter = async (req, res) => {
   ) {
     const id = req.url.split("/").at(-2);
     const type = req.url.split("/").at(-1);
-    const { url } = JSON.parse(jsonController.get(id));
+    const { url } = JSON.parse(mediaController.get(id));
     if (url) {
       const filePath =
         url.split(".").at(0) + "-" + type + "." + url.split(".").at(-1);
@@ -28,7 +28,7 @@ const fileRouter = async (req, res) => {
   } else if (req.url.match(/\/api\/getfile\/([0-9]+)/) && req.method == "GET") {
     const id = req.url.split("/").at(-1);
 
-    const { url } = JSON.parse(jsonController.get(id));
+    const { url } = JSON.parse(mediaController.get(id));
     if (url) {
       if (fs.existsSync(url)) {
         res.setHeader("Content-Type", "image/jpeg");
@@ -50,7 +50,7 @@ const fileRouter = async (req, res) => {
   ) {
     const albumName = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
-    res.end(jsonController.getByAlbum(albumName));
+    res.end(mediaController.getByAlbum(albumName));
   }
 };
 

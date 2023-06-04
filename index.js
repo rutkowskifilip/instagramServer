@@ -1,18 +1,20 @@
 const http = require("http");
 require("dotenv").config();
-const imageRouter = require("./app/imageRouter");
+const mediaRouter = require("./app/media/mediaRouter");
 
-const tagsRouter = require("./app/tagsRouter");
-const filtersRouter = require("./app/filtersRouter");
-const fileRouter = require("./app/fileRouter");
-const usersRouter = require("./app/usersRouter");
+const tagsRouter = require("./app/tags/tagsRouter");
+const filtersRouter = require("./app/filters/filtersRouter");
+const fileRouter = require("./app/file/fileRouter");
+const usersRouter = require("./app/user/usersRouter");
+const { log } = require("console");
+const profileRouter = require("./app/profile/profileRouter");
 
 http
   .createServer(async (req, res) => {
     //images
 
     if (req.url.search("/api/photos") != -1) {
-      await imageRouter(req, res);
+      await mediaRouter(req, res);
     }
 
     //tags
@@ -26,6 +28,8 @@ http
       await fileRouter(req, res);
     } else if (req.url.search("/api/users") != -1) {
       await usersRouter(req, res);
+    } else if (req.url.search("/api/profile") != -1) {
+      await profileRouter(req, res);
     }
   })
   .listen(process.env.APP_PORT, () =>

@@ -25,8 +25,9 @@ class Tag {
   }
 }
 class User {
-  constructor(id, name, lastName, email, password) {
+  constructor(id, username, name, lastName, email, password) {
     this.id = id;
+    this.username = username;
     this.name = name;
     this.lastName = lastName;
     this.email = email;

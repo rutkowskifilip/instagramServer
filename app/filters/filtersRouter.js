@@ -1,6 +1,6 @@
 const filtersController = require("./filtersController");
-const getRequestData = require("./getRequestData");
-const jsonController = require("./jsonController");
+const getRequestData = require("../utils/getRequestData");
+const mediaController = require("../media/mediaController");
 const filtersRouter = async (req, res) => {
   if (
     req.url.match(/\/api\/filters\/metadata\/([0-9]+)/) &&
@@ -14,7 +14,7 @@ const filtersRouter = async (req, res) => {
   } else if (req.url == "/api/filters" && req.method == "PATCH") {
     // filter file
     const { id, ...data } = JSON.parse(await getRequestData(req));
-    const { url } = JSON.parse(jsonController.get(id));
+    const { url } = JSON.parse(mediaController.get(id));
 
     res.setHeader("Content-Type", "application/json");
     if (url) {
