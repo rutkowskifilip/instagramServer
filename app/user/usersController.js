@@ -91,10 +91,17 @@ module.exports = {
   },
   get: async (res, token) => {
     const userFromToken = await jwt.verifyToken(token);
-    const user = users.find((e) => e.id === userFromToken.id);
+    const user = users.find((e) => e.email === userFromToken.email);
+    console.log(userFromToken, user);
     if (user) {
       res.statusCode = 200;
-      return JSON.stringify({ user: user });
+      return JSON.stringify({
+        username: user.username,
+        name: user.name,
+        lastName: user.lastName,
+        email: user.email,
+        password: user.password,
+      });
     }
   },
 };

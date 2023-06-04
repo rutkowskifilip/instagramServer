@@ -11,6 +11,7 @@ const profileRouter = async (req, res) => {
 
     const [bearer, token] = bearerHeader.split(" ");
     req.token = token;
+    console.log(token);
     res.setHeader("Content-Type", "application/json");
     res.end(await usersController.get(res, token));
 
