@@ -2,9 +2,9 @@ const fileController = require("../file/fileController");
 const mediaController = require("./mediaController");
 const getRequestData = require("../utils/getRequestData");
 const mediaRouter = async (req, res) => {
+  console.log(req.url);
   if (req.url == "/api/photos" && req.method == "POST") {
     // add one photo
-
     fileController.add(req, res);
   } else if (req.url == "/api/photos" && req.method == "GET") {
     // get all photos
@@ -34,7 +34,9 @@ const mediaRouter = async (req, res) => {
     }
   } else if (req.url == "/api/photos" && req.method == "PATCH") {
   } else if (req.url == "/api/photos/tags" && req.method == "PATCH") {
+    console.log("here");
     const data = await getRequestData(req);
+    console.log(data);
     res.setHeader("Content-Type", "application/json");
     res.end(mediaController.updateTags(res, JSON.parse(data)));
 
@@ -46,6 +48,10 @@ const mediaRouter = async (req, res) => {
     const id = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
     res.end(mediaController.getTags(res, id));
+  } else if (req.url == "/api/photos/location" && req.method == "PATCH") {
+    const data = await getRequestData(req);
+    res.setHeader("Content-Type", "application/json");
+    res.end(mediaController.updateLocation(res, JSON.parse(data)));
   }
 };
 

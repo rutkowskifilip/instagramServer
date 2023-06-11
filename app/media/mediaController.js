@@ -17,6 +17,7 @@ module.exports = {
       const id = images.length > 0 ? images.at(-1).id + 1 : 1;
       const image = new Image(id, arr[0].dir, arr[0].filename);
       images.push(image);
+      console.log(JSON.stringify(image));
       return JSON.stringify(image);
     }
 
@@ -73,12 +74,13 @@ module.exports = {
     const image = images.find((e) => e.id === data.id);
     if (image) {
       data.tags.forEach((t) => {
-        const tag = tagsController.getOneByName(t);
-        image.setTags(JSON.parse(tag));
+        // const tag = tagsController.getOneByName(t);
+        image.setTags({ name: t });
       });
 
       return JSON.stringify(image);
     } else {
+      console.log("error");
       res.statusCode = 404;
       return JSON.stringify({ message: `There's no file with id ${data.id}` });
     }
@@ -90,6 +92,18 @@ module.exports = {
     } else {
       res.statusCode = 404;
       return JSON.stringify({ message: `There's no file with id ${id}` });
+    }
+  },
+  updateLocation: (res, data) => {
+    const image = images.find((e) => e.id === data.id);
+    console.log(data.location);
+    if (image) {
+      image.setLocation(data.location);
+      return JSON.stringify(image);
+    } else {
+      console.log("error");
+      res.statusCode = 404;
+      return JSON.stringify({ message: `There's no file with id ${data.id}` });
     }
   },
 };

@@ -1,5 +1,7 @@
 const usersController = require("../user/usersController");
 const jwt = require("../utils/jwt");
+const getRequestData = require("../utils/getRequestData");
+
 const profileRouter = async (req, res) => {
   if (req.url == "/api/profile" && req.method == "POST") {
     // add profile photo
@@ -18,8 +20,13 @@ const profileRouter = async (req, res) => {
     // res.end(mediaController.getall());
   } else if (req.url == "/api/profile" && req.method == "PATCH") {
     // update user info
-    //     res.setHeader("Content-Type", "application/json");
-    //     res.end(mediaController.getall());
+    console.log("here");
+    const data = await getRequestData(req);
+    const bearerHeader = req.headers.authorization;
+
+    const [bearer, token] = bearerHeader.split(" ");
+    res.setHeader("Content-Type", "application/json");
+    res.end(await usersController.update(res, token, JSON.parse(data)));
   }
 };
 

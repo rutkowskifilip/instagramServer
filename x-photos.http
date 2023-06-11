@@ -12,7 +12,7 @@ Content-Type: image/jpeg
 Content-Disposition: form-data; name="directory"
 Content-Type: text/plain
 
-album_name
+a
 ------FormBoundary1234
 
 
@@ -21,7 +21,7 @@ album_name
 GET http://localhost:3000/api/photos HTTP/1.1
 
 ### GET - get by id
-GET http://localhost:3000/api/photos/0 HTTP/1.1
+GET http://localhost:3000/api/photos/1 HTTP/1.1
 
 
 
@@ -29,11 +29,20 @@ GET http://localhost:3000/api/photos/0 HTTP/1.1
 DELETE  http://localhost:3000/api/photos/1 HTTP/1.1
 
 
-### PATCH - update by id
+### PATCH - update tags by id
 PATCH  http://localhost:3000/api/photos/tags HTTP/1.1
 content-type: application/json
 
 {
   "id": 1,
-  "tags":["#love"]
+  "tags":["love", "sport", "cars"]
+}
+
+### PATCH - update location by id
+PATCH  http://localhost:3000/api/photos/location HTTP/1.1
+content-type: application/json
+
+{
+  "id": 1,
+  "location":"Krakow"
 }

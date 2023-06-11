@@ -7,6 +7,7 @@ class Image {
     this.lastChange = "orignal";
     this.history = [{ status: "original", lastModifiedDate: Date.now() }];
     this.tags = [];
+    this.location = "";
   }
   setHistory(update) {
     this.history.push({ status: update, lastModifiedDate: Date.now() });
@@ -15,6 +16,9 @@ class Image {
     if (this.tags.filter((e) => e.name === tag.name).length === 0) {
       this.tags.push({ name: tag.name, popularity: tag.popularity });
     }
+  }
+  setLocation(location) {
+    this.location = location;
   }
 }
 class Tag {
@@ -37,6 +41,15 @@ class User {
 
   setConfirmed() {
     this.confirmed = true;
+  }
+  setName(name) {
+    this.name = name;
+  }
+  setLastname(lastName) {
+    this.lastName = lastName;
+  }
+  setPassword(password) {
+    this.password = password;
   }
 }
 module.exports = { Image, Tag, User };

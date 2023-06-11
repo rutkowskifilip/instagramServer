@@ -104,4 +104,26 @@ module.exports = {
       });
     }
   },
+  update: async (res, token, data) => {
+    const userFromToken = await jwt.verifyToken(token);
+    const user = users.find((e) => e.email === userFromToken.email);
+    console.log(userFromToken);
+    if (user) {
+      if (data.name !== "") {
+        user.setName(data.name);
+      }
+      if (data.lastName !== "") {
+        user.setLastname(data.lastName);
+      }
+      if (data.password !== "") {
+        encryptedPass = await bcrypt.encryptPass(data.password);
+        user.setPassword(encryptedPass);
+      }
+      res.statusCode = 200;
+      return JSON.stringify(user);
+    } else {
+      res.statusCode = 404;
+      return "Wrong data";
+    }
+  },
 };

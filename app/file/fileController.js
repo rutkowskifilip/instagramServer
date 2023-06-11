@@ -18,7 +18,7 @@ module.exports = {
         return err;
       } else {
         const dir = fields.directory;
-
+        // console.log(dir);
         newDir = path.dirname(__dirname) + "/uploads/" + dir;
         const photos = [];
         if (files.file.length > 1) {
