@@ -1,16 +1,35 @@
 ### GET - get user info
 GET http://localhost:3000/api/profile HTTP/1.1
 Content-Type:application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJsb2dpbiI6ImFAYS5wbCJ9LCJpYXQiOjE2ODU5MDE4NjEsImV4cCI6MTY4NTkwNTQ2MX0.BSUmTPKTVqlEWA_YdCOg3R6lA37sRG-9iajzjt1kvqA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiYUBhLnBsIiwicGFzc3dvcmQiOiJxd2VydHkifSwiaWF0IjoxNjg2NjgwNDg4LCJleHAiOjE2ODY2ODQwODh9.J3MXltgm_jCNsf3bEXad0Ii7qNyJvrP3yzI_LgeeNnw
 
 ### PATCH - update user data
 PATCH http://localhost:3000/api/profile HTTP/1.1
 Content-Type:application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiYUBhLnBsIiwicGFzc3dvcmQiOiJxd2VydHkifSwiaWF0IjoxNjg2NTAzNjc1LCJleHAiOjE2ODY1MDcyNzV9.E2RYF5jq7ahK0A3GzRISSvbXU78PYMJcRfDeH1d541Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiYUBhLnBsIiwicGFzc3dvcmQiOiJxd2VydHkifSwiaWF0IjoxNjg2NjgwODA2LCJleHAiOjE2ODY2ODQ0MDZ9.reLnvFg5mT99d6xG0BCL0nD0qQQeJDbE1kdmZ73GEGY
 
 {
   "email":"a@a.pl",
   "name":"bb",
   "lastName":"bb",
-  "password":""
+  "password":"",
+  "profilePic":1
 }
+
+
+### POST - add profile photo
+POST http://localhost:3000/api/profile HTTP/1.1
+Content-Type: multipart/form-data; boundary=----FormBoundary1234
+
+------FormBoundary1234
+Content-Disposition: form-data; name="file"; filename="image.jpg"
+Content-Type: image/jpeg
+
+< ./input.jpg
+
+------FormBoundary1234
+Content-Disposition: form-data; name="directory"
+Content-Type: text/plain
+
+a
+------FormBoundary1234

@@ -2,10 +2,9 @@ const fileController = require("../file/fileController");
 const mediaController = require("./mediaController");
 const getRequestData = require("../utils/getRequestData");
 const mediaRouter = async (req, res) => {
-  console.log(req.url);
   if (req.url == "/api/photos" && req.method == "POST") {
     // add one photo
-    fileController.add(req, res);
+    fileController.add(req, res, false);
   } else if (req.url == "/api/photos" && req.method == "GET") {
     // get all photos
 
@@ -18,7 +17,7 @@ const mediaRouter = async (req, res) => {
     const id = req.url.split("/").at(-1);
     res.setHeader("Content-Type", "application/json");
 
-    res.end(mediaController.get(id));
+    res.end(JSON.stringify(mediaController.get(id)));
   } else if (
     req.url.match(/\/api\/photos\/([0-9]+)/) &&
     req.method == "DELETE"
@@ -34,9 +33,8 @@ const mediaRouter = async (req, res) => {
     }
   } else if (req.url == "/api/photos" && req.method == "PATCH") {
   } else if (req.url == "/api/photos/tags" && req.method == "PATCH") {
-    console.log("here");
     const data = await getRequestData(req);
-    console.log(data);
+
     res.setHeader("Content-Type", "application/json");
     res.end(mediaController.updateTags(res, JSON.parse(data)));
 

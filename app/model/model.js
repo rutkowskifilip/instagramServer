@@ -4,13 +4,16 @@ class Image {
     this.album = url.split("/").at(-1);
     this.originalName = originalName;
     this.url = url + "/" + originalName;
-    this.lastChange = "orignal";
+    this.lastChange = "original";
     this.history = [{ status: "original", lastModifiedDate: Date.now() }];
     this.tags = [];
     this.location = "";
   }
   setHistory(update) {
     this.history.push({ status: update, lastModifiedDate: Date.now() });
+  }
+  setLastChange(update) {
+    this.lastChange = update;
   }
   setTags(tag) {
     if (this.tags.filter((e) => e.name === tag.name).length === 0) {
@@ -19,6 +22,9 @@ class Image {
   }
   setLocation(location) {
     this.location = location;
+  }
+  setUrl(url) {
+    this.url = url;
   }
 }
 class Tag {
@@ -37,6 +43,7 @@ class User {
     this.email = email;
     this.password = password;
     this.confirmed = false;
+    this.profilePic = "";
   }
 
   setConfirmed() {
@@ -50,6 +57,9 @@ class User {
   }
   setPassword(password) {
     this.password = password;
+  }
+  setProfilePic(profilePic) {
+    this.profilePic = profilePic;
   }
 }
 module.exports = { Image, Tag, User };

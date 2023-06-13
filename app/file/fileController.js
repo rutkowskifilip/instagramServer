@@ -4,7 +4,7 @@ const mediaController = require("../media/mediaController");
 const path = require("path");
 const { log } = require("console");
 module.exports = {
-  add: (req, res) => {
+  add: (req, res, profile) => {
     const form = formidable({
       multiples: true,
       uploadDir: path.dirname(__dirname) + "/uploads",
@@ -37,8 +37,11 @@ module.exports = {
               console.log(error);
             }
           });
-
-          res.end(mediaController.add(photos));
+          if (profile) {
+            res.end(mediaController.addToProfile(photos));
+          } else {
+            res.end(mediaController.add(photos));
+          }
         } else {
           const { path } = files.file;
           filename = path.split("\\").at(-1);
@@ -52,15 +55,19 @@ module.exports = {
             console.log(error);
           }
 
-          res.end(mediaController.add(photos));
+          if (profile) {
+            res.end(mediaController.addToProfile(photos));
+          } else {
+            res.end(mediaController.add(photos));
+          }
         }
       }
     });
   },
 
   delete: (id) => {
-    // delete by id
-    console.log(id);
+    // // delete by id
+    // console.log(id);
     const image = mediaController.delete(id);
     if (image !== 0) {
       try {
@@ -74,7 +81,7 @@ module.exports = {
     }
   },
   update: (id) => {
-    console.log(id);
+    // console.log(id);
     // update by id
   },
 };

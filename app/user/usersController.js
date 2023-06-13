@@ -6,7 +6,6 @@ const users = new Array();
 const confirmedUsers = new Array();
 module.exports = {
   register: async (res, data) => {
-    console.log(Object.values(data));
     dataComplete = Object.values(data).length === 5 ? true : false;
     Object.values(data).forEach((e) => {
       if (!e) {
@@ -70,7 +69,7 @@ module.exports = {
     }
   },
   login: async (res, data) => {
-    console.log(data);
+    // console.log(data);
     const user = confirmedUsers.find((e) => e.email === data.email);
     res.setHeader("Content-Type", "application/json");
     if (user) {
@@ -92,7 +91,7 @@ module.exports = {
   get: async (res, token) => {
     const userFromToken = await jwt.verifyToken(token);
     const user = users.find((e) => e.email === userFromToken.email);
-    console.log(userFromToken, user);
+
     if (user) {
       res.statusCode = 200;
       return JSON.stringify({
@@ -101,13 +100,28 @@ module.exports = {
         lastName: user.lastName,
         email: user.email,
         password: user.password,
+        profilePic: user.profilePic,
       });
+    }
+  },
+  addProfilePic: async (res, token, photo) => {
+    const userFromToken = await jwt.verifyToken(token);
+    const user = users.find((e) => e.email === userFromToken.email);
+    console.log(photo);
+    if (user) {
+      // console.log(photo);
+      // user.setProfilePic(photo.getId());
+      // res.statusCode = 200;
+      // return JSON.stringify(user);
+    } else {
+      // res.statusCode = 404;
+      // return "Wrong data";
     }
   },
   update: async (res, token, data) => {
     const userFromToken = await jwt.verifyToken(token);
     const user = users.find((e) => e.email === userFromToken.email);
-    console.log(userFromToken);
+
     if (user) {
       if (data.name !== "") {
         user.setName(data.name);
@@ -119,11 +133,23 @@ module.exports = {
         encryptedPass = await bcrypt.encryptPass(data.password);
         user.setPassword(encryptedPass);
       }
+      if (data.profilePic !== "") {
+        user.setProfilePic(data.profilePic);
+      }
       res.statusCode = 200;
       return JSON.stringify(user);
     } else {
       res.statusCode = 404;
       return "Wrong data";
+    }
+  },
+  find: (email) => {
+    const user = users.find((e) => e.email === email);
+    if (user) {
+      return JSON.stringify({
+        user: user.username,
+        profilePic: user.profilePic,
+      });
     }
   },
 };

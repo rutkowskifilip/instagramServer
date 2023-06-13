@@ -14,11 +14,11 @@ const filtersRouter = async (req, res) => {
   } else if (req.url == "/api/filters" && req.method == "PATCH") {
     // filter file
     const { id, ...data } = JSON.parse(await getRequestData(req));
-    const { url } = JSON.parse(mediaController.get(id));
+    const image = mediaController.get(id);
 
     res.setHeader("Content-Type", "application/json");
-    if (url) {
-      res.end(await filtersController.filter(id, data, url, res));
+    if (image) {
+      res.end(await filtersController.filter(id, data, image, res));
     } else {
       res.statusCode = 404;
       res.end(JSON.stringify({ message: "file does not exist" }));

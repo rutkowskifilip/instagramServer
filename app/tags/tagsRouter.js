@@ -1,7 +1,6 @@
 const tagsController = require("./tagsController");
 const getRequestData = require("../utils/getRequestData");
 const tagsRouter = async (req, res) => {
-  console.log(req.url);
   if (req.url == "/api/tags" && req.method == "POST") {
     // create one tag
 

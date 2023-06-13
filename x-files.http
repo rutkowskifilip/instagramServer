@@ -6,3 +6,6 @@ GET http://localhost:3000/api/getfile/1 HTTP/1.1
 
 ### GET - get files from dir
 GET http://localhost:3000/api/getfile/album HTTP/1.1
+
+### GET - get profile pic by id 
+GET http://localhost:3000/api/getfile/profile/1 HTTP/1.1

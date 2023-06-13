@@ -3,10 +3,10 @@ POST http://localhost:3000/api/users/register HTTP/1.1
 content-type: application/json
 
 {   
-  "username":"a",
+  "username":"aaaaaaaaaaaaa",
   "name":"a",
   "lastName": "a",
-  "email": "a@a.pl",
+  "email": "ab@a.pl",
   "password":"qwerty"
 }
 
@@ -18,6 +18,10 @@ POST http://localhost:3000/api/users/login HTTP/1.1
 content-type: application/json
 
 {   
-  "email": "a@a.pl",
+  "email": "c@c.pl",
   "password":"qwerty"
 }
+
+### GET - confirm user
+GET http://localhost:3000/api/users/c@c.pl HTTP/1.1
+content-type: application/application/json  

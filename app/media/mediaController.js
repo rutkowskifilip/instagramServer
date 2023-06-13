@@ -1,7 +1,7 @@
 const { Image } = require("../model/model");
 const tagsController = require("../tags/tagsController");
 let images = new Array();
-
+let profileImages = new Array();
 module.exports = {
   add: (arr) => {
     if (arr.length > 1) {
@@ -17,14 +17,31 @@ module.exports = {
       const id = images.length > 0 ? images.at(-1).id + 1 : 1;
       const image = new Image(id, arr[0].dir, arr[0].filename);
       images.push(image);
-      console.log(JSON.stringify(image));
+
       return JSON.stringify(image);
     }
 
     // add
   },
+  addToProfile: (arr) => {
+    if (arr.length > 1) {
+      const response = [];
+      arr.forEach((e) => {
+        const id = profileImages.at(-1).id + 1;
+        const image = new Image(id, e.dir, e.filename);
+        profileImages.push(image);
+        response.push(image);
+      });
+      return JSON.stringify(response);
+    } else {
+      const id = profileImages.length > 0 ? profileImages.at(-1).id + 1 : 1;
+      const image = new Image(id, arr[0].dir, arr[0].filename);
+      profileImages.push(image);
+
+      return JSON.stringify(image);
+    }
+  },
   get: (id) => {
-    console.log(id);
     let image = "";
     if (parseInt(id) === 0) {
       image = images.at(-1);
@@ -33,20 +50,30 @@ module.exports = {
     }
 
     if (image) {
-      return JSON.stringify(image);
+      return image;
     } else {
       return JSON.stringify({ message: `There's no file with id ${id}` });
     }
     //get one by id
   },
+  getProfilePic: (id) => {
+    let image = "";
+    if (parseInt(id) === 0) {
+      image = profileImages.at(-1);
+    } else {
+      image = profileImages.find((e) => e.id === parseInt(id));
+    }
+
+    if (image) {
+      return JSON.stringify(image);
+    } else {
+      return JSON.stringify({ message: `There's no file with id ${id}` });
+    }
+  },
   getall: () => {
     return JSON.stringify(images);
   },
   getByAlbum: (name) => {
-    console.log(name);
-    images.forEach((e) => {
-      console.log(e.album, name);
-    });
     files = images.filter((e) => e.album === name);
 
     return JSON.stringify(files);
@@ -67,6 +94,7 @@ module.exports = {
   update: (id, type) => {
     const image = images.find((e) => e.id === parseInt(id));
     image.setHistory(type);
+    image.setLastChange(type);
     return JSON.stringify(image);
     // update by id
   },
@@ -96,7 +124,7 @@ module.exports = {
   },
   updateLocation: (res, data) => {
     const image = images.find((e) => e.id === data.id);
-    console.log(data.location);
+
     if (image) {
       image.setLocation(data.location);
       return JSON.stringify(image);

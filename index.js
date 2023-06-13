@@ -12,7 +12,7 @@ const profileRouter = require("./app/profile/profileRouter");
 http
   .createServer(async (req, res) => {
     //images
-
+    console.log(req.url, req.method);
     if (req.url.search("/api/photos") != -1) {
       await mediaRouter(req, res);
     }

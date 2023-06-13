@@ -2,14 +2,13 @@ const sharp = require("sharp");
 const mediaController = require("../media/mediaController");
 module.exports = {
   metadata: async (id, res) => {
-    const { url } = JSON.parse(mediaController.get(id));
-    console.log(url);
+    const { url } = mediaController.get(id);
+
     return new Promise(async (resolve, reject) => {
       try {
         if (url) {
-          console.log(url);
           let meta = await sharp(url).metadata();
-          console.log(meta);
+
           resolve(JSON.stringify(meta));
         } else {
           res.statusCode = 404;
@@ -21,16 +20,24 @@ module.exports = {
     });
   },
 
-  filter: async (id, data, url, res) => {
+  filter: async (id, data, image, res) => {
     const { lastChange: type } = data;
+    const url = image.url;
     const types = ["jpg", "png", "webp", "gif", "avif"];
     if (types.includes(url.split(".").at(-1))) {
       let newUrl =
-        url.split(".").at(0) + "-" + type + "." + url.split(".").at(-1);
+        url.split(".").at(0) +
+        "." +
+        url.split(".").at(1) +
+        "-" +
+        type +
+        "." +
+        url.split(".").at(-1);
+
       switch (type) {
         case "rotate":
           const { rotate } = data;
-          await sharp(url).rotate(rotate).toFile(newUrl);
+          await sharp(url).rotate(90).toFile(newUrl);
           break;
         case "resize":
           const { resize } = data;

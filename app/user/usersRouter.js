@@ -23,7 +23,16 @@ const usersRouter = async (req, res) => {
     const data = JSON.parse(await getRequestData(req));
 
     usersController.login(res, data);
-  } else if (req.url == "/api/users/all" && req.method == "GET") {
+  } else if (
+    req.url.match(
+      /^\/api\/users\/([\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})$/
+    ) &&
+    req.method == "GET"
+  ) {
+    const email = req.url.split("/").at(-1);
+    console.log(email);
+    res.setHeader("Content-Type", "application/json");
+    res.end(usersController.find(email));
     // get one tag
   }
 };
