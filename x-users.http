@@ -6,8 +6,8 @@ content-type: application/json
   "username":"aaaaaaaaaaaaa",
   "name":"a",
   "lastName": "a",
-  "email": "ab@a.pl",
-  "password":"qwerty"
+  "email": "a@a.pl",
+  "password":"a"
 }
 
 ### GET - confirm user
@@ -22,6 +22,6 @@ content-type: application/json
   "password":"qwerty"
 }
 
-### GET - confirm user
-GET http://localhost:3000/api/users/c@c.pl HTTP/1.1
+### GET - username
+GET http://localhost:3000/api/users/a@a.pl HTTP/1.1
 content-type: application/application/json  
