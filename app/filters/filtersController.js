@@ -76,7 +76,7 @@ module.exports = {
           break;
       }
 
-      return mediaController.update(id, type);
+      return mediaController.update(id, type, newUrl);
     } else {
       res.statusCode = 404;
       return JSON.stringify({

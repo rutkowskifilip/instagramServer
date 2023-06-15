@@ -91,10 +91,11 @@ module.exports = {
     }
     // delete by id
   },
-  update: (id, type) => {
+  update: (id, type, newUrl) => {
     const image = images.find((e) => e.id === parseInt(id));
     image.setHistory(type);
     image.setLastChange(type);
+    image.setUrl(newUrl);
     return JSON.stringify(image);
     // update by id
   },
